@@ -28,7 +28,8 @@ option = st.selectbox(
     "What equation would you like to use for your art",
     ("hypospirograph", "epispirograph", "second equation", "Lissajous","third equation", "butterfly equation",
      "fourth equation", "fifth equation", "sixth equation", "seventh equation", "eighth equation","nineth equation",
-     "tenth equation", "eleventh equation", "twelfth equation", "thirteenth equation","fourteenth equation"
+     "tenth equation", "eleventh equation", "twelfth equation", "thirteenth equation","fourteenth equation", "fifteenth equation",
+     "sixteenth equation", "seventeenth equation"
      ),
     index=None,
     placeholder="Select an equation",
@@ -45,7 +46,7 @@ if option == "hypospirograph":
     eqn_func = equations.hypospirograph
     opt_transform = "No"
 
-if option == "epispirograph":
+elif option == "epispirograph":
     with st.expander("Parametric equation"):
         st.latex(r"""
                 \begin{aligned} x &= (a+b)\cos(\theta) + c\cos\!\left(\frac{a+b}{b}\,\theta\right) \\
@@ -72,10 +73,14 @@ elif option == "Lissajous":
         st.latex(r"""
                     \begin{aligned}
                     x &= a \sin\left(b\theta + \frac{\pi}{2}\right) \\
-                    y &= c \sin(\theta)
-                    \end{aligned}
+                    y &= c \sin(d\theta)
+                    \end{aligned}\\
+                    Hints: a =5 , b= 5, c = 3, d = 4\\
+                           a= 5 , b= 5, c =3 , d=2\\
+                           a= 5 , b= 3, c= 3, d =4 \\
+                           a= 5 , b= 3, c= 3, d =5 
                     """)
-    labels = ['a', 'b', 'c']
+    labels = ['a', 'b', 'c','d']
     values = [st.number_input(f"Enter {label}", min_value=-100.0, step=0.1) for label in labels]
     eqn_func = equations.Lissajous
     opt_transform = "No"
@@ -84,11 +89,15 @@ elif option == "third equation":
     with st.expander("Parametric equation"):
         st.latex(r"""
                 \begin{aligned}
-                x &= a \sin(\theta) + b \cos(c\theta) \\
-                y &= a \cos(\theta)
-                \end{aligned}
+                x &= a \sin(\theta) +  b \cos\left(c\theta + \frac{\pi}{2}\right) \\
+                y &= a \cos(d\theta)
+                \end{aligned}\\
+                Hints: a =5 , b= 7, c = 5, d = 3 (beetle)\\
+                           a= 5 , b= 3, c =5 , d=7\\
+                           a =5 , b= 7, c = 5, d = 4 \\
+                           a= 5 , b= 3, c= 3, d =5 
                 """)
-    labels = ['a', 'b', 'c']
+    labels = ['a', 'b', 'c', 'd']
     values = [st.number_input(f"Enter {label}", min_value=-100.0, step=0.1) for label in labels]
     eqn_func = equations.third_eqn
     opt_transform = "No"
@@ -100,7 +109,12 @@ elif option == "butterfly equation":
                     \begin{aligned}
                     x &= \sin(\theta)\Big(\exp(\cos(\theta)) - a\cos(b\theta) - \sin\!\left(\tfrac{\theta}{c}\right)^{5}\Big) \\
                     y &= \cos(\theta)\Big(\exp(\cos(\theta)) - a\cos(b\theta) - \sin\!\left(\tfrac{\theta}{c}\right)^{5}\Big)
-                    \end{aligned}
+                    \end{aligned}\\
+                    Hints: a =5 , b= 3, c = 3 , (3-winged),\\
+                           a= 5 , b= 4, c =3 ,(6-winged)\\
+                           a =5 , b= 4, c = 2,(6-winged) \\
+                           a= 5 , b= 4, c= 7, (6-winged)
+                    
 """)
     labels = ['a', 'b','c']
     values = [st.number_input(f"Enter {label}", min_value=-100.0, step=0.1) for label in labels]
@@ -114,6 +128,10 @@ elif option == "fourth equation":
                 x &= \sin(\theta)\,\tan\!\left(\frac{a\theta}{b}\right) \\
                 y &= \cos(\theta)\,\tan\!\left(\frac{a\theta}{b}\right)
                 \end{aligned}
+                     Hints: a =5 , b= 9,\\
+                           a= 5 , b= 4, \\
+                           a =7 , b= 9,  \\
+                           a= 9 , b= 7,               
                 """)
     labels = ['a', 'b',]
     values = [st.number_input(f"Enter {label}", min_value=-100.0, step=0.1) for label in labels]
@@ -232,6 +250,7 @@ elif option == "thirteenth equation":
                                  ("Yes", "No"),
                                  index=None, )
 
+
 elif option == "fourteenth equation":
     with st.expander("Parametric equation"):
         st.latex(r"""
@@ -246,6 +265,44 @@ elif option == "fourteenth equation":
     opt_transform = st.selectbox("Would you like to perform a rotational transformation",
                                  ("Yes", "No"),
                                  index=None, )
+
+elif option == "fifteenth equation":
+    with st.expander("Parametric equation"):
+        st.latex(r"""
+        \begin{aligned}
+        x &= a \big(\cos(b\theta)\big)^{2.5} \\
+        y &= c \,\sin\!\Big(\sin\!\left(\tfrac{d\theta}{\pi}\right)\Big)\,\big(\cos\!\left(\tfrac{b\theta}{\pi}\right)\big)^{2}
+        \end{aligned}
+        """)
+    labels = ['a', 'b', 'c', 'd']
+    values = [st.number_input(f"Enter {label}", min_value=-100.0, step=0.1) for label in labels]
+    eqn_func = equations.fifth_eqn
+    opt_transform = st.selectbox("Would you like to perform a rotational transformation",
+                                 ("Yes", "No"),
+                                 index=None, )
+
+
+elif option == "sixteenth equation":
+    with st.expander("Parametric equation"):
+        st.latex(r"""
+                \begin{aligned} x &= (a-b)\cos(\theta) + c\cos\!\left(\frac{a-b}{a}\,\theta\right) \\ 
+                y &= (a-b)\sin(\theta) - c\sin\!\left(\frac{a-b}{a}\,\theta\right) \end{aligned}
+            """)
+    labels = ['a','b','c']
+    values = [st.number_input(f"Enter {label}", min_value=-100.0, step=0.1) for label in labels]
+    eqn_func = equations.sixteenth
+    opt_transform = "No"
+
+elif option == "seventeenth equation":
+    with st.expander("Parametric equation"):
+        st.latex(r"""
+                \begin{aligned} x &= (a+b)\cos(\theta) + c\cos\!\left(\frac{a+b}{a}\,\theta\right) \\
+                 y &= (a+b)\sin(\theta) + c\sin\!\left(\frac{a+b}{a}\,\theta\right) \end{aligned}
+            """)
+    labels = ['a','b','c']
+    values = [st.number_input(f"Enter {label}", min_value=-100.0, step=0.1) for label in labels]
+    eqn_func = equations.seventeenth
+    opt_transform = "No"
 
 
 #fig, ax = plot.initFigureWindow()
@@ -336,7 +393,7 @@ else:
         for i in range(0, len(x), 1):  # step for speed
             frames.append(go.Frame(
                 data=[
-                    go.Scatter(x=x[:i], y=y[:i], mode="lines", line=dict(color="blue")),
+                    go.Scatter(x=x[:i], y=y[:i], mode="lines", line=dict(color="red")),
                 ],
                 name=str(i)
             ))
@@ -347,7 +404,7 @@ fig.frames = frames
 
 fig.update_layout(
     xaxis=dict(range=[xmin, xmax]),
-    yaxis=dict(range=[ymin, ymax]),
+    yaxis=dict(range=[ymin, ymax],scaleanchor="x"),
     title="Multiple Rotated Curves Animation",
     updatemenus=[{
         "buttons": [

@@ -72,16 +72,16 @@ class equations():
 
 
     def Lissajous(params,theta):
-        a,b,c = params
+        a,b,c,d = params
         x  = a * np.sin(b*theta + np.pi/2)
-        y = c * np.sin(theta)
+        y = c * np.sin(d*theta)
         return x, y
 
 
     def third_eqn(params, theta):
-        a, b, c= params
-        x = a*np.sin(theta) + b*np.cos(c*theta)
-        y = a*np.cos(theta)
+        a, b, c, d= params
+        x = a*np.sin(theta) + b*np.cos(c*theta + np.pi/2)
+        y = a*np.cos(d*theta)
         return x,y
 
 
@@ -213,6 +213,20 @@ class equations():
         x = a*np.sin(np.sin(a*theta/np.pi))*np.cos(np.cos(a*b*theta/np.pi)**2)
         y = c*np.cos(d*theta/np.pi)**2*3*np.sin(theta)
 
+
+    def sixteenth(params,theta):
+      a, b , c  = params
+      x = (a-b)*np.cos(theta) + c*np.cos(((a-b)/a)*theta)
+      y = (a-b)*np.sin(theta) - c*np.sin(((a-b)/a)*theta)
+
+      return x, y
+
+    def seventeenth(params,theta):
+      a, b , c  = params
+      x = (a + b) * np.cos(theta) + c * np.cos(((a + b) / a) * theta)
+      y = (a + b) * np.sin(theta) + c * np.sin(((a + b) / a) * theta)
+
+      return x, y
     ######## Implicit eqn
 
     def imp_1(params):
